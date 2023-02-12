@@ -1,10 +1,24 @@
 #Use this on your ec2 instance
 
-#Download the CloudWatch Agent installation package to the user's desktop.
+1#Download the CloudWatch Agent installation package to the user's desktop.
 Invoke-WebRequest -Uri https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/amazon-cloudwatch-agent.msi -OutFile $env:USERPROFILE\Desktop\amazon-cloudwatch-agent.msi
 
-#Install the CloudWatch Agent
+2#Install the CloudWatch Agent
 msiexec /i $env:USERPROFILE\Desktop\amazon-cloudwatch-agent.msi
 
-#Launch the amazon-cloudwatch-agent-config-wizard.exe executable
+3#Launch the amazon-cloudwatch-agent-config-wizard.exe executable
 & $env:ProgramFiles\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent-config-wizard.exe
+
+# To start the CloudWatch Agent
+https://bobcares.com/blog/status-of-cloudwatch-agent/
+ https://www.howtogeek.com/devops/how-to-install-and-configure-the-aws-cloudwatch-agent-on-a-windows-server/     - for Windows
+ sudo service awslogs start   -for linux
+ sudo service awslogsd start   -for Amazonlinux
+ 
+ #To query the status of the CloudWatch agent locally using the command line
+ #On a server running Windows Server, enter the following in PowerShell as an administrator:
+ & $Env:ProgramFiles\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent-ctl.ps1 -m ec2 -a status
+ 
+ #On a Linux server, enter the following:
+ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
+ 
