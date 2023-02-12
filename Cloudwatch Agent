@@ -1,0 +1,10 @@
+#Use this on your ec2 instance
+
+#Download the CloudWatch Agent installation package to the user's desktop.
+Invoke-WebRequest -Uri https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/amazon-cloudwatch-agent.msi -OutFile $env:USERPROFILE\Desktop\amazon-cloudwatch-agent.msi
+
+#Install the CloudWatch Agent
+msiexec /i $env:USERPROFILE\Desktop\amazon-cloudwatch-agent.msi
+
+#Launch the amazon-cloudwatch-agent-config-wizard.exe executable
+& $env:ProgramFiles\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent-config-wizard.exe
