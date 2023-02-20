@@ -1,0 +1,31 @@
+#we have to create one role and attch to the instance - CloudwatchAgentserverPolicy
+# Login to the instance and open powershell to Download the cloudwatch agent - C:\>
+$parameters = @{
+    Uri = 'https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/AmazonCloudWatchAgent.zip'
+    OutFile = "$env:TEMP/AmazonCloudWatchAgent.zip"
+}
+Invoke-WebRequest @parameters
+
+#Unzip the file - C:\>
+Expand-Archive -Path "$env:TEMP/AmazonCloudWatchAgent.zip" -DestinationPath  "$env:TEMP/AmazonCloudWatchAgent"
+
+#Set the working directory - C:\>
+Set-Location -Path  "$env:TEMP/AmazonCloudWatchAgent"
+
+#Run the install script - C:\Users\Administrator\AppData\Local\Temp\2\AmazonCloudWatchAgent>
+./install.ps1
+
+#Run the configuration script - 
+Set-Location -Path 'C:\Program Files\Amazon\AmazonCloudWatchAgent\'
+.\amazon-cloudwatch-agent-config-wizard.exe
+
+#After the configuration is done, you will check with below cmd
+#C:\Program Files\Amazon\AmazonCloudWatchAgent> 
+ls
+#you get the config.json file
+
+
+#Start the cloudWatch Agent - 
+.\amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c file:'C:\Program Files\Amazon\AmazonCloudWatchAgent\config.json' -s
+
+
