@@ -1,0 +1,8 @@
+If you get error in rds- The Network Adaptor could not establish the connection
+-It three resons:-
+1.- Go to rds>Databases>select your database> Connectivity &security> Check Public accessible yes or no (If it is no then no one able to access the databse)
+Sol- Go to Modify Tab> Additional configuration> Click on Public Accessible
+
+2- Security group> Check Inbound Rule
+
+3- Check Username, Password, Port no., Url
