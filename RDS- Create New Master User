@@ -1,0 +1,12 @@
+-Creating another Master User of RDS(MySQL):-
+
+-First connect to the database> Check the permissions given to existing Master User by using commands> show grants for '(provide your Master username)';
+
+-Copy all grants and paste it on notepad eg- GRANT SELECT, INSERT, UPDATE.....TO '(Master user name is here)'WITH GRANT OPTION
+
+-Now to create a new user use this cmd> CREATE USER '(Provide new user name)' IDENTIFIED BY '(provide any name or no.)'
+
+-To check the privileges check with the grant command as above> show grants for '(provide your Master username)';
+
+-To provide all privileges life privious Master user, just replace the old Master user name to New Master user name which we saved earlier and paste it on the terminal
+eg- > GRANT SELECT, INSERT, UPDATE.....TO '(Provide New Master user name here)'WITH GRANT OPTION
